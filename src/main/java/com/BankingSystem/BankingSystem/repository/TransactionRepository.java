@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findByFromAccountIdOrToAccountId(Long fromId, Long toId);
+    List<Transaction> findTop5ByFromAccountIdOrToAccountIdOrderByTimestampDesc(Long fromId, Long toId);
+    boolean existsByFromAccountIdOrToAccountId(Long fromId, Long toId);
 }

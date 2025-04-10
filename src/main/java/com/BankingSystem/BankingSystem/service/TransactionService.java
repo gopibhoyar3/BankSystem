@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -81,4 +84,16 @@ public class TransactionService {
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
+    public Map<String, List<Transaction>> getMonthlyStatement(Long accountId) {
+        List<Transaction> transactions = transactionRepository
+                .findByFromAccountIdOrToAccountId(accountId, accountId);
+
+        return transactions.stream()
+                .collect(Collectors.groupingBy(txn ->
+                                txn.getTimestamp().getMonth() + " " + txn.getTimestamp().getYear(),
+                        LinkedHashMap::new, // maintain order
+                        Collectors.toList()
+                ));
+    }
+
 }
