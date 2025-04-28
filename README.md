@@ -75,17 +75,3 @@ A full-featured backend project simulating a basic banking system using Java Spr
 ## 🔐 Security
 
 > Spring Security is disabled for development. You can later enable JWT or Basic Auth.
-
----
-
-## ⚙️ Running the App
-
-### Prerequisites:
-- Java 17 or 21
-- Maven
-
-### Steps:
-```bash
-git clone https://github.com/YOUR_USERNAME/banking-system.git
-cd banking-system
-mvn spring-boot:run
